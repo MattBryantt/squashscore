@@ -2,19 +2,26 @@ import React, { useState } from "react";
 import { Pressable, Text, View, StyleSheet} from "react-native";
 
 
-
 export default function App() {
   return (
     <View style={styles.appContainer}>
       <View style={styles.scorePanelContainer}>
         <ScorePanel/>
       </View>
-      <View style={styles.otherContainer}>
+      <View style={styles.scoreCardContainer}>
         <ScoreCard/>
       </View>
     </View>
   );
 };
+
+const GameData = () => {
+  
+}
+
+type gameCardProps = {
+  gameNumber: number;
+}
 
 const ScorePanel = () => {
   return (
@@ -56,8 +63,32 @@ const ServeSymbol = () => {
 
 const ScoreCard = () => {
   return (
-    <View>
+    <View style={styles.scoreCardContent}>
       <Text style={styles.scoreCardText}>Scorecard</Text>
+      <View style={styles.gameCardContainer}>
+        <GameCard gameNumber={1}></GameCard>
+      </View>
+      <View style={styles.gameCardContainer}>
+        <GameCard gameNumber={2}/>
+      </View>
+      <View style={styles.gameCardContainer}>
+        <GameCard gameNumber={3}/>
+      </View>
+      <View style={styles.gameCardContainer}>
+        <GameCard gameNumber={4}/>
+      </View>
+      <View style={styles.gameCardContainer}>
+        <GameCard gameNumber={5}/>
+      </View>
+    </View>
+  );
+};
+
+const GameCard = ({gameNumber}: gameCardProps) => {
+  return (
+    <View style={styles.gameCardContent}>
+      <Text style={styles.gameCardText}>Game {gameNumber}</Text>
+      <Pressable><Text style={styles.gameCardText}>{'>'}</Text></Pressable>
     </View>
   );
 };
@@ -77,7 +108,7 @@ const styles = StyleSheet.create({
     width: "90%",
     paddingBottom: 15,
   },
-  otherContainer: {
+  scoreCardContainer: {
     flex: 2,
     width: "90%",
     paddingTop: 15,
@@ -112,8 +143,34 @@ const styles = StyleSheet.create({
 
   scoreCardText: {
     fontSize: 26,
+    paddingBottom: 5,
     color: "#f1f1f1",
     fontWeight: "bold",
     textAlign: "left",
+  },
+
+  scoreCardContent: {
+    flex: 1,
+    paddingBottom: 25,
+  },
+
+  gameCardContainer: {
+    flex: 1,
+    paddingVertical: 8,
+  },
+  gameCardContent: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 14,
+    borderColor: "#4f4f4f",
+    borderRadius: 12,
+    borderWidth: 1,
+  },
+  gameCardText: {
+    fontWeight: "bold",
+    fontSize: 18,
+    color: "#f1f1f1",
   }
 });
